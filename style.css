@@ -57,29 +57,82 @@ My code
 ```
 */
 
+.theme-light {
+   --color-primary: #A7DADC;
+   --color-secondary: #C5F0FB;
+   --color-accent: #E8E9ED;
+   --font-color: #161314;
+}
+
+.theme-dark {
+    --color-primary: #150811;
+    --color-secondary: #380036;
+    --color-accent: #056464;
+    --font-color: #EBFBFF;
+ }
+
+ .theme-usa {
+    --color-primary: #002868;
+    --color-secondary: #BF0A30 ;
+    --color-accent: #BF0A30 ;
+    --font-color: #fff;
+ }
+
+ .list-normal {
+    --item-height: 100px;
+    --item-font-size: 25px;
+ }
+
+ .list-compact {
+    --item-height: 50px;
+    --item-font-size: 18px;
+ }
+
+ .list-large {
+    --item-height: 110px;
+    --item-font-size: 35px;
+ }
+
+ 
+
 body {
     
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-   
+    background-color: var(--color-secondary);
+    color: var(--font-color)
 }
-
-
 
 main {
     display: flex;
     flex-direction: column-reverse
 }
 
-h1, h2, form {
+.preferences {
+    background-color: var(--color-primary);
+}
+
+h1, h2, form, p {
     margin: 30px;
+}
+
+a, a:visited {
+    color: var(--font-color);
+   
 }
 
 h1 {
     font-size: 40px;
+    margin-bottom: 0;
 }
 
 h2 {
+   
     font-size: 30px;
+}
+
+p {
+    margin-top: 0;
+    font-style: italic;
 }
 
 
@@ -87,17 +140,32 @@ li {
 
     align-self: center;
     list-style: none;
-    background-color: antiquewhite;
-    
+    background-color: var(--color-primary);
+    color: var(--font-color);
     border-radius: 2px;
-    margin: 5px;
-    padding: 5px;
+    margin: 20px;
+    padding: 10px;
     font-weight: 900;
+    font-size: var(--item-font-size);
+    height: var(--item-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border: 1px solid var(--font-color);
+    box-shadow:  10px 10px 1px var(--color-primary);
 
 }
 
 select {
     width: 100%;
+    padding: 10px;
+    background-color: var(--color-accent);
+    color: var(--font-color);
+}
+
+option {
+    border-radius: 0;
 }
 
 .tooltip .tooltiptext {
@@ -110,27 +178,27 @@ select {
 footer {
     text-align: center;
     margin: 20px;
+   
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 1200px) {
+    
     body {
-        max-width: 1000px;
-        margin: 0 auto;
-         height: 100vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     }
-    main {
-    flex-direction: row;    
-   
 
+    main {
+    flex-direction: row;
     }
 
     #list-main {
         display: flex;
         flex-direction: column;
-      
         width: 100%;
         justify-content: center;
         margin: 5px;
@@ -138,7 +206,6 @@ footer {
 
     ul {
         display: grid;
-       
         justify-items: stretch;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
@@ -147,8 +214,6 @@ footer {
     }
 
     li {
-        height: 100px;
-        
         
         display: block;
         display: flex;
@@ -157,8 +222,7 @@ footer {
     }
 .preferences {
     margin-left: auto;
-
-    background-color: aliceblue;
+    margin-top: 10px;
 }
 
 /* From: https://www.w3schools.com/css/css_rwd_mediaqueries.asp */
@@ -168,12 +232,13 @@ footer {
     z-index: 1;
     top: -10px;
     left: 110%;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    /* text-align: center; */
+    width: 200px;
+    background-color: var(--color-accent);
+    color: var(--font-color);
     padding: 10px;
     border-radius: 6px; 
+    border: 1px solid var(--font-color);
+    box-shadow:  10px 10px 1px var(--color-primary);
 }
 
 

@@ -17,18 +17,19 @@ const listitems = [
 const $list = document.getElementById('list')
 const listhtml = []
 const $main = document.getElementsByName('list-main')
+const $listStyles = document.getElementById('list-styles')
+const $themeStyles = document.getElementById('theme-styles')
+const $htmlElement = document.documentElement
 
 for (const listitem of listitems) {
     listhtml.push(`
         <li class="listitem tooltip"> ${listitem.item} <span class="tooltiptext">${listitem.description}</span></li>
     `)
-
 }
 
 $list.innerHTML = listhtml.join('')
 
-$list.addEventListener ('mouseover', function (e) {
-    if (e.target.classList.contains('listitem')) {
-        console.log(e.target.dataset.description)
-    }
+$themeStyles.addEventListener('change', function(){
+    $htmlElement.classList 
+
 })
