@@ -22,8 +22,13 @@ const $themeStyles = document.getElementById('theme-styles')
 const $htmlElement = document.documentElement
 
 for (const listitem of listitems) {
+    /*
+    For some reason, I can't style tooltips using this method. Maybe b/c the classes are loaded in dynamically?. See setStyle().
     listhtml.push(`
         <li class="listitem tooltip"> ${listitem.item} <span class="tooltiptext">${listitem.description}</span></li>
+    `)*/
+    listhtml.push(`
+        <li class="listitem tooltip"> ${listitem.item}</li>
     `)
 }
 
@@ -33,3 +38,53 @@ $themeStyles.addEventListener('change', function(){
     $htmlElement.classList 
 
 })
+
+const theme = {
+    primary: '#A7DADC',
+    secondary: '#C5F0FB',
+    accent: '#E8E9ED',
+    fontColor: '#161314'
+}
+
+const listNormal = {
+    height: '100px',
+    fontSize: '25px'
+}
+
+
+const $body = document.body
+const $pref = document.getElementById('pref')
+const $source = document.getElementById('source')
+const listItems = document.querySelectorAll('li')
+const selectBoxes = document.querySelectorAll('select')
+const toolTips = document.querySelectorAll('tooltiptext')
+
+function setStyle () {
+    $body.style.backgroundColor = theme.secondary
+    $body.style.color = theme.fontColor
+    $pref.style.backgroundColor = theme.primary
+    $source.style.color = theme.fontColor
+
+    for (const listItem of listItems) {
+        listItem.style.backgroundColor = theme.primary
+        listItem.style.color = theme.fontColor
+        listItem.style.borderColor - theme.fontColor
+        listItem.style.boxShadow = '10px 10px 1px' + theme.primary
+    }
+
+    for (const selectBox of selectBoxes){
+        selectBox.style.backgroundColor = theme.accent
+        selectBox.style.color = theme.fontColor
+    }
+    /*
+    This for some reason doesn't work.
+    for (const toolTip of toolTips) {
+        toolTip.style.backgroundColor = theme.accent
+        toolTip.style.color = theme.fontColor
+        toolTip.style.borderColor = theme.fontColor
+        toolTip.style.boxShadow = '10px 10px 1px' + theme.primary
+    }
+    */
+}
+
+setStyle()

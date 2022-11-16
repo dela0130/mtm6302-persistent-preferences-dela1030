@@ -79,18 +79,18 @@ My code
  }
 
  .list-normal {
-    --item-height: 100px;
+    --item-height: 70px;
     --item-font-size: 25px;
  }
 
  .list-compact {
-    --item-height: 50px;
+    --item-height: 60px;
     --item-font-size: 18px;
  }
 
  .list-large {
-    --item-height: 110px;
-    --item-font-size: 35px;
+    --item-height: 80px;
+    --item-font-size: 30px;
  }
 
  
@@ -145,15 +145,15 @@ li {
     border-radius: 2px;
     margin: 20px;
     padding: 10px;
-    font-weight: 900;
+    font-weight: 700;
     font-size: var(--item-font-size);
     height: var(--item-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    border: 1px solid var(--font-color);
-    box-shadow:  10px 10px 1px var(--color-primary);
+    border: 1px solid;
+    box-shadow:  var(--color-primary);
 
 }
 
