@@ -57,49 +57,14 @@ My code
 ```
 */
 
-.theme-light {
-   --color-primary: #A7DADC;
-   --color-secondary: #C5F0FB;
-   --color-accent: #E8E9ED;
-   --font-color: #161314;
-}
 
-.theme-dark {
-    --color-primary: #150811;
-    --color-secondary: #380036;
-    --color-accent: #056464;
-    --font-color: #EBFBFF;
- }
-
- .theme-usa {
-    --color-primary: #002868;
-    --color-secondary: #BF0A30 ;
-    --color-accent: #BF0A30 ;
-    --font-color: #fff;
- }
-
- .list-normal {
-    --item-height: 70px;
-    --item-font-size: 25px;
- }
-
- .list-compact {
-    --item-height: 60px;
-    --item-font-size: 18px;
- }
-
- .list-large {
-    --item-height: 80px;
-    --item-font-size: 30px;
- }
 
  
 
 body {
     
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: var(--color-secondary);
-    color: var(--font-color)
+
 }
 
 main {
@@ -107,17 +72,8 @@ main {
     flex-direction: column-reverse
 }
 
-.preferences {
-    background-color: var(--color-primary);
-}
-
 h1, h2, form, p {
     margin: 30px;
-}
-
-a, a:visited {
-    color: var(--font-color);
-   
 }
 
 h1 {
@@ -140,28 +96,26 @@ li {
 
     align-self: center;
     list-style: none;
-    background-color: var(--color-primary);
-    color: var(--font-color);
     border-radius: 2px;
     margin: 20px;
     padding: 10px;
     font-weight: 700;
     font-size: var(--item-font-size);
-    height: var(--item-height);
+    transform: var(--tranform);
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    border: 1px solid;
-    box-shadow:  var(--color-primary);
+}
 
+span {
+    padding: 10px;
+    margin: 10px 0;
 }
 
 select {
     width: 100%;
     padding: 10px;
-    background-color: var(--color-accent);
-    color: var(--font-color);
 }
 
 option {
@@ -171,14 +125,11 @@ option {
 .tooltip .tooltiptext {
    display: block;
     font-weight: 400;
-
-
 }
 
 footer {
     text-align: center;
     margin: 20px;
-   
 }
 
 @media only screen and (min-width: 1200px) {
@@ -214,44 +165,36 @@ footer {
     }
 
     li {
-        
+        padding: 50px 10px;
         display: block;
         display: flex;
         justify-content: center;
         align-items: center;
     }
-.preferences {
-    margin-left: auto;
-    margin-top: 10px;
-}
+    .preferences {
+        margin-left: auto;
+        margin-top: 10px;
+    }
 
-/* From: https://www.w3schools.com/css/css_rwd_mediaqueries.asp */
-.tooltip .tooltiptext {
-    visibility: hidden; 
-    position: absolute;
-    z-index: 1;
-    top: -10px;
-    left: 110%;
-    width: 200px;
-    background-color: var(--color-accent);
-    color: var(--font-color);
-    padding: 10px;
-    border-radius: 6px; 
-    border: 1px solid var(--font-color);
-    box-shadow:  10px 10px 1px var(--color-primary);
-}
+    /* From: https://www.w3schools.com/css/css_tooltip.asp*/
+    .tooltip .tooltiptext {
+        visibility: hidden; 
+        position: absolute;
+        z-index: 1;
+        top: -10px;
+        left: 110%;
+        width: 200px;
+        padding: 10px;
+        border-radius: 6px; 
+        box-shadow:  10px 10px 1px var(--color-primary);
+    }
 
+    .tooltip {
+        position: relative;
+    }
 
-
-
-.tooltip {
-    position: relative;
-  }
-
-
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+    }
 
 }

@@ -19,45 +19,31 @@ const listhtml = []
 const $main = document.getElementsByName('list-main')
 const $listStyles = document.getElementById('list-styles')
 const $themeStyles = document.getElementById('theme-styles')
-const $htmlElement = document.documentElement
+const $body = document.body
+const $pref = document.getElementById('pref')
+const $source = document.getElementById('source')
+const selectBoxes = document.querySelectorAll('select')
 
-for (const listitem of listitems) {
-    /*
-    For some reason, I can't style tooltips using this method. Maybe b/c the classes are loaded in dynamically?. See setStyle().
-    listhtml.push(`
-        <li class="listitem tooltip"> ${listitem.item} <span class="tooltiptext">${listitem.description}</span></li>
-    `)*/
-    listhtml.push(`
-        <li class="listitem tooltip"> ${listitem.item}</li>
-    `)
-}
-
-$list.innerHTML = listhtml.join('')
-
-$themeStyles.addEventListener('change', function(){
-    $htmlElement.classList 
-
-})
-
-const theme = {
+let theme = {
     primary: '#A7DADC',
     secondary: '#C5F0FB',
     accent: '#E8E9ED',
     fontColor: '#161314'
 }
 
-const listNormal = {
-    height: '100px',
+let format = {
+    scale: 'scale(1)',
     fontSize: '25px'
 }
 
+function setFormat () {
+    for (const listItem of $list.children) {
+        listItem.style.fontSize = format.fontSize
+        listItem.style.tranform = format.scale
+    }
+}
 
-const $body = document.body
-const $pref = document.getElementById('pref')
-const $source = document.getElementById('source')
-const listItems = document.querySelectorAll('li')
-const selectBoxes = document.querySelectorAll('select')
-const toolTips = document.querySelectorAll('tooltiptext')
+
 
 function setStyle () {
     $body.style.backgroundColor = theme.secondary
@@ -65,26 +51,131 @@ function setStyle () {
     $pref.style.backgroundColor = theme.primary
     $source.style.color = theme.fontColor
 
-    for (const listItem of listItems) {
-        listItem.style.backgroundColor = theme.primary
-        listItem.style.color = theme.fontColor
-        listItem.style.borderColor - theme.fontColor
-        listItem.style.boxShadow = '10px 10px 1px' + theme.primary
+    /* When I tried to directly target the li's that were dynamically added, they were not seen by javascript. So after reading the article below, I realized I would need to use an element that was already there in the DOM before the page loaded. So I tried targetting the children of the ul, and it worked!!
+
+    https://medium.com/littlemanco/handling-dynamically-created-html-in-javascript-2746e02cc063
+    */
+
+    for (const listItem of $list.children) {
+            listItem.style.backgroundColor = theme.primary
+            listItem.style.color = theme.fontColor
+            listItem.style.border = 'solid 1px' + theme.fontColor
+            listItem.style.boxShadow = '10px 10px 1px' + theme.primary
+
+                for (toolTip of listItem.children) {
+                    toolTip.style.backgroundColor = theme.accent
+                    toolTip.style.color = theme.fontColor
+                    toolTip.style.border = '1px solid' + theme.fontColor
+                    toolTip.style.boxShadow = '10px 10px 1px' + theme.primary
+                   
+                }           
     }
 
     for (const selectBox of selectBoxes){
         selectBox.style.backgroundColor = theme.accent
         selectBox.style.color = theme.fontColor
     }
-    /*
-    This for some reason doesn't work.
-    for (const toolTip of toolTips) {
-        toolTip.style.backgroundColor = theme.accent
-        toolTip.style.color = theme.fontColor
-        toolTip.style.borderColor = theme.fontColor
-        toolTip.style.boxShadow = '10px 10px 1px' + theme.primary
+
+}
+
+for (const listitem of listitems) {
+
+    listhtml.push(`
+        <li class="tooltip"> ${listitem.item} <span class="tooltiptext">${listitem.description}</span></li>
+    `)
+ 
+}
+
+$list.innerHTML = listhtml.join('')
+
+$themeStyles.addEventListener('change', function(e){
+    e.preventDefault()
+    if ($themeStyles.selectedIndex === 0) {
+        theme = {
+            primary: '#A7DADC',
+            secondary: '#C5F0FB',
+            accent: '#E8E9ED',
+            fontColor: '#161314'
+        }
     }
-    */
+    if ($themeStyles.selectedIndex === 1) {
+        theme = {
+            primary: '#150811',
+            secondary: '#380036',
+            accent: '#056464',
+            fontColor: '#EBFBFF'
+        }
+    }
+
+    if ($themeStyles.selectedIndex === 2) {
+        theme = {
+            primary: '#002868',
+            secondary: '#BF0A30',
+            accent: '#BF0A30',
+            fontColor: '#fff'
+        }
+    }
+
+    localStorage.setItem('themeDropdown', $themeStyles.selectedIndex)
+    localStorage.setItem('themeStyle', JSON.stringify(theme))
+
+    setStyle()
+
+})
+
+$listStyles.addEventListener('change', function(e){
+    e.preventDefault(e)
+    if ($listStyles.selectedIndex === 0) {
+        format = {
+            scale: 'scale(1)',
+            fontSize: '25px'
+        }
+    }
+
+    if ($listStyles.selectedIndex === 1) {
+        format = {
+            scale: 'scale(.9)',
+            fontSize: '18px'
+        }
+    }
+
+    if ($listStyles.selectedIndex === 2) {
+        format = {
+    scale: 'scale(1.1)',
+            fontSize: '30px'
+        }
+    }
+
+    localStorage.setItem('formatDropdown', $listStyles.selectedIndex)
+    localStorage.setItem('formatStyle', JSON.stringify(format))
+
+    setFormat()
+
+})
+
+const ls = localStorage.getItem('themeDropdown')
+const ls2 = JSON.parse(localStorage.getItem('themeStyle'))
+const ls3 = localStorage.getItem('formatDropdown')
+const ls4 = JSON.parse(localStorage.getItem('formatStyle'))
+
+if (ls) {
+    $themeStyles.selectedIndex = ls
+}
+
+if (ls2) {
+    theme = ls2
+}
+
+if (ls3) {
+    $listStyles.selectedIndex = ls3
+}
+
+if (ls4) {
+    format = ls4
 }
 
 setStyle()
+setFormat()
+
+
+    
