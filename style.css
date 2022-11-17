@@ -137,7 +137,6 @@ footer {
     body {
     max-width: 1000px;
     margin: 0 auto;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
